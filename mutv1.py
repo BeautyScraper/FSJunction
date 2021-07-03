@@ -22,7 +22,7 @@ def inputWithinTime(inputString='',timelimit=10):
         
 def moveByFastCopy(txtFileName,dstination):
     fastCopyLocation = 'C:\\app\\FastCopyPortable\\FastCopyPortable.exe'
-    cmdTemplate = '''%0 /log /cmd="diff" /auto_close /force_close /srcfile=%1 /to=%2 '''
+    cmdTemplate = '''%0 /log /cmd="diff" /auto_close /force_close /srcfile=%1 /to="%2" '''
     cmd = cmdTemplate.replace('%0',fastCopyLocation)
     cmd = cmd.replace('%1',txtFileName)
     cmd = cmd.replace('%2',dstination)
