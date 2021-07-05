@@ -8,13 +8,14 @@ import numpy as np
 import os
 import re
 import shutil
+from tqdm import tqdm
 # from mutv1 import *
 
 
 
 
-InputDir = r'D:\paradise\stuff\Essence\FS\all\celebJunction\Sacred2'
-dstDir = r'C:\FSCelebJuction'
+InputDir = r'D:\paradise\stuff\Essence\FS\all\Sluts\Sacred2'
+dstDir = r'C:\FSCelebJuctionBig'
 batchFSFile = r'D:\Developed\FSJunction\bodychehrFSCelb.bat'
 resultDir = 'D:\Developed\FaceSwapExperimental\TestResult'
 
@@ -32,8 +33,9 @@ def getThisFile(sourceFile,parentDir):
 
 def fileListCopy(fileList, DstDir):
     for fp in fileList:
+        print('copying ', fp, ' in ', DstDir)
         if (Path(DstDir) / Path(fp).name).is_file():
-            return
+            continue
         if not Path(fp).is_file():
             print('src file not found', fp)
             continue
@@ -44,7 +46,8 @@ def getSourceFromDir(sourceFileName = 'Yummyh(91)',FromDir= r'D:\paradise\stuff\
     tkr = [x for x in Path(FromDir).rglob('*%s*.jpg' % sourceFileName)]
     listOfFoundFiles = []
     ExactDir = dstDirPath / sourceFileName / 'Body'
-    for tk in tkr:
+    print('searching for ', sourceFileName)
+    for tk in tqdm(tkr):
        if not re.search('.* @hudengi.*W1t81N.*',str(tk)):
           continue
        khr = re.search('(.*) @hudengi (.*) W1t81N (.*)',str(tk))
@@ -66,7 +69,7 @@ def getSourceFromDir(sourceFileName = 'Yummyh(91)',FromDir= r'D:\paradise\stuff\
 def Copied(src_filepath,ExactDir):
     csvFilePath = ExactDir / 'copyRecords.csv'
     srcP = [Path(x).parent.name + '/' + Path(x).name for x in src_filepath]
-    
+
     # import pdb;pdb.set_trace()
     if csvFilePath.is_file():
         df = pd.read_csv(str(csvFilePath))
@@ -156,5 +159,4 @@ for eachFile in ipPath.glob('*.jpg'):
     if Filename not in checkedFiles:
         checkedFiles.append(Filename)
         getSourceFromDir(Filename)
-    
 runFSjunction()

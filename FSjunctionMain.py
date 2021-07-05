@@ -7,7 +7,7 @@ import random
 import numpy as np
 import os
 import re
-from mutv1 import *
+# from mutv1 import *
 import shutil
 
 InputDir = r'D:\paradise\stuff\Essence\FS\all\sideInterestD\Sacred2'
